@@ -102,12 +102,16 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | Attribute | Values | Default | What it does |
 |---|---|---|---|
 | `wf-datepicker` | `reset` | **–** | when clicked, clear the selected range and reset the input(s) connected to your date pickers. |
+| `data-hide-when-empty` | `""` | **–** | Auto-hide reset buttons when inputs are empty |
 
 ### Examples
 
 ```html
 <!-- Reset all pickers -->
 <button wf-datepicker="reset">Reset all dates</button>
+
+<!-- Hide reset button if datepicker empty -->
+<button wf-datepicker="reset" data-hide-when-empty="">Reset all dates</button>
 
 <!-- Reset a specific picker -->
 <input id="booking-range" datepicker="range" data-min-nights="2">
