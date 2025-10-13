@@ -205,7 +205,7 @@ input.addEventListener('wf-datepicker:change', (e) => {
   --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black);
 
   /* Background color for selected date ranges or highlighted areas */
-  --wf-dp-range-color: #e3f2fd;
+  --wf-dp-range-color: color-mix(in srgb, var(--wf-dp-primary) 10%, white);
 
   /* Neutral text or icon color for secondary and less emphasized UI elements */
   --wf-dp-grey: #595959;
