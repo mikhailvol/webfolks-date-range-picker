@@ -18,6 +18,9 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Maintainable** – Clear code, CSS variables, and minimal API surface.  
 - **Configurable stay length** – Define minimum nights or allow same-day selections via attribute.  
 - **Reset the date range** – Add an optional button to reset the date range selection.
+- **Smart positioning** – Choose how the calendar opens: above, below, or auto-adjusted to the viewport.
+- **Flexible alignment** – Align popovers left, center, or right relative to the input.
+- **Commit modes** – Choose instant input updates or confirm-on-CTA for controlled UX.
 
 ---
 
@@ -73,16 +76,38 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | `data-wf-dp-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
 | `data-wf-dp-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums. |
 | `data-wf-dp-commit-mode` | `instant` \| `confirm` | **instant** | Controls when the input updates. `instant` updates on each click; `confirm` updates only when the user clicks the Select dates button. |
+| `data-wf-dp-align` | `left` \| `center` \| `right` | **center** | Horizontal alignment of the popover relative to the input. |
+| `data-wf-dp-drop` | `down` \| `up` \| `auto` | **down** | Controls whether the popover opens below, above, or auto-selects direction based on viewport space. |
 
 ### Examples
 
 ```html
+<!-- Default setup: disables past dates, allows 2 years into the future, friendly format -->
 <input datepicker="range" placeholder="Select date range">
+
+<!-- Allow past dates (up to 1 year back), 3 years into the future -->
 <input datepicker="range" data-wf-dp-disable-past="false" data-wf-dp-max-years-past="1" data-wf-dp-max-years="3">
+
+<!-- Use ISO-style date format with custom text separator -->
 <input datepicker="range" data-wf-dp-format="YYYY-MM-DD" data-wf-dp-separator=" to ">
+
+<!-- Show total number of nights in the footer once a full range is selected -->
 <input datepicker="range" data-wf-dp-show-nights="true">
+
+<!-- Require full range before form submission; re-open picker if validation fails -->
 <input datepicker="range" data-wf-dp-required="true" data-wf-dp-open-on-error="true">
+
+<!-- Desktop only: automatically close the picker after the first full range selection -->
 <input datepicker="range" data-wf-dp-autoclose-first="true">
+
+<!-- Align popover right and open upward -->
+<input datepicker="range" data-wf-dp-align="right" data-wf-dp-drop="up">
+
+<!-- Automatically decide direction (smart positioning) -->
+<input datepicker="range" data-wf-dp-drop="auto">
+
+<!-- Use confirm mode: input updates only after user confirms selection -->
+<input datepicker="range" data-wf-dp-commit-mode="confirm">
 ```
 
 ---
@@ -98,9 +123,16 @@ Add attributes directly to the input. Defaults shown in **bold**.
 ### Examples
 
 ```html
+<!-- Reset all date pickers on the page when clicked -->
 <button data-wf-dp-reset>Reset all dates</button>
+
+<!-- Same as above, but the button is hidden when all pickers are empty -->
 <button data-wf-dp-reset data-wf-dp-hide-when-empty>Reset all dates</button>
+
+<!-- Example of a specific picker with minimum 2-night stay -->
 <input id="booking-range" datepicker="range" data-wf-dp-min-nights="2">
+
+<!-- Reset only the picker with ID #booking-range -->
 <button data-wf-dp-reset data-wf-dp-target="#booking-range">Reset</button>
 ```
 
