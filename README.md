@@ -244,6 +244,7 @@ MIT License
   data-wf-dp-open-on-error="true"
   data-wf-dp-autoclose-first="true"
   data-wf-dp-min-nights="1"
+  data-wf-dp-commit-mode="instant"
   readonly
 />
 
