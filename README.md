@@ -277,6 +277,8 @@ MIT License
   data-wf-dp-autoclose-first="true"
   data-wf-dp-min-nights="1"
   data-wf-dp-commit-mode="instant"
+  data-wf-dp-align="right"
+  data-wf-dp-drop="auto"
   readonly
 />
 
