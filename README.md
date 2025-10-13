@@ -17,7 +17,7 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Real-time validation** – Inline error message; optional open-on-error.  
 - **Maintainable** – Clear code, CSS variables, and minimal API surface.
 - **Configurable stay length** – Define minimum nights or allow same-day selections via attribute.
-- **Reset the date range** – Add optional button to reset the date range selection.
+- **Reset the date range** – Add an optional button to reset the date range selection.
 
 ---
 
