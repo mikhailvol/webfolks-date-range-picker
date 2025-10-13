@@ -72,14 +72,6 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | `data-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
 | `data-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums |
 
-## ⚙️ Configuration (other attributes)
-
-Add attributes directly to the input. Defaults shown in **bold**.
-
-| Attribute | Values | Default | What it does |
-|---|---|---|---|
-| `wf-datepicker` | `reset` | **–** | when clicked, clear the selected range and reset the input(s) connected to your date pickers. |
-
 ### Examples
 
 ```html
@@ -102,6 +94,25 @@ Add attributes directly to the input. Defaults shown in **bold**.
 <input datepicker="range" data-autoclose-first="true">
 ```
 
+## ⏏️ Configuration (other attributes)
+
+Add attributes directly to the input. Defaults shown in **bold**.
+
+| Attribute | Values | Default | What it does |
+|---|---|---|---|
+| `wf-datepicker` | `reset` | **–** | when clicked, clear the selected range and reset the input(s) connected to your date pickers. |
+
+### Examples
+
+```html
+<!-- Reset all pickers -->
+<button wf-datepicker="reset">Reset all dates</button>
+
+<!-- Reset a specific picker -->
+<input id="booking-range" datepicker="range" data-min-nights="2">
+<button wf-datepicker="reset" data-target="#booking-range">Reset</button>
+
+```
 ---
 
 ## 🗓 Date Format Patterns
