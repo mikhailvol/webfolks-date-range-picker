@@ -72,6 +72,14 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | `data-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
 | `data-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums |
 
+## ⚙️ Configuration (other attributes)
+
+Add attributes directly to the input. Defaults shown in **bold**.
+
+| Attribute | Values | Default | What it does |
+|---|---|---|---|
+| `wf-datepicker` | `reset` | **–** | when clicked, clear the selected range and reset the input(s) connected to your date pickers. |
+
 ### Examples
 
 ```html
@@ -278,6 +286,8 @@ MIT License
   data-min-nights="1"
   readonly
 />
+
+<button type="button" wf-datepicker="reset">Reset dates</button>
 ```
 
 ---
