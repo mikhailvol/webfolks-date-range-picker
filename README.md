@@ -16,6 +16,7 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Configurable limits** – Restrict past/future selection windows by years.  
 - **Real-time validation** – Inline error message; optional open-on-error.  
 - **Maintainable** – Clear code, CSS variables, and minimal API surface.
+- **Configurable stay length** – Define minimum nights or allow same-day selections via attribute.
 
 ---
 
@@ -60,15 +61,16 @@ Add attributes directly to the input. Defaults shown in **bold**.
 
 | Attribute | Values | Default | What it does |
 |---|---|---|---|
-| `data-disable-past` | `"true"` \| `"false"` | **"true"** | Disable selecting dates before today. |
+| `data-disable-past` | `true` \| `false` | **true** | Disable selecting dates before today. |
 | `data-max-years` | number (≥0) | **2** | How many years into the future the user can select. |
 | `data-max-years-past` | number (≥0) | **2** | How many years into the past (only used if `data-disable-past="false"`). |
 | `data-date-format` | pattern string | **`EEE, MMM d`** | Display format (input + footer). See patterns below. |
 | `data-range-separator` | string | **` — `** | Text between start and end dates. |
-| `data-show-nights` | `"true"` \| `"false"` | **"false"** | Show “(n nights)” in footer when a full range is selected. |
-| `required-valid` | `"true"` \| `"false"` | **"false"** | If `"true"`, field must have a complete range to submit. |
-| `open-on-error` | `"true"` \| `"false"` | **"false"** | If `"true"`, open the picker when submit is blocked by validation. |
-| `data-autoclose-first` | `"true"` \| `"false"` | **"false"** | Desktop only: automatically close after the first completed selection (first open only). |
+| `data-show-nights` | `true` \| `false` | **false** | Show “(n nights)” in footer when a full range is selected. |
+| `required-valid` | `true` \| `false` | **false** | If `true`, field must have a complete range to submit. |
+| `open-on-error` | `true` \| `false` | **false** | If `true`, open the picker when submit is blocked by validation. |
+| `data-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
+| `data-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums |
 
 ### Examples
 
@@ -130,14 +132,6 @@ Supported tokens (both cases where it makes sense):
   - On first open, the modal auto-scrolls to **current month** (or to the **start month** if a range is already selected).
 - Smooth, jank-free interactions (preserves scroll position during re-renders).
 
-> 💡 For instant tap response on iOS, include this CSS:
-```css
-.wf-dp-cell, .wf-dp-btn, .wf-dp-cta {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-```
-
 ---
 
 ## 🖥 Desktop Experience
@@ -186,14 +180,29 @@ Define these to match your design system:
 
 ```css
 :root {
-  --wf-dp-primary-color: #007bff;
-  --wf-dp-selected-color: #007bff;
+  /* Primary brand color used across interactive elements (buttons, highlights, active states) */
+  --wf-dp-primary: #0062eb;
+
+  /* Darker variant of the primary color for hover or pressed states */
+  --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black);
+
+  /* Background color for selected date ranges or highlighted areas */
   --wf-dp-range-color: #e3f2fd;
-  --wf-dp-disabled-color: #6c757d;
-  --wf-dp-current-date-color: #007bff;
-  --wf-dp-bg: #fff;
-  --wf-dp-text: #111827;
+
+  /* Neutral text or icon color for secondary and less emphasized UI elements */
+  --wf-dp-grey: #595959;
+
+  /* Base border color for inputs, popovers, and dividers */
   --wf-dp-border: #e5e7eb;
+
+  /* Default background color for components and containers */
+  --wf-dp-bg: #ffffff;
+
+  /* Background color used for hover states and subtle surface changes */
+  --wf-dp-hover: #f3f4f6;
+
+  /* Soft, layered shadow for popovers, modals, and elevated surfaces */
+  --wf-dp-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 ```
 
@@ -251,6 +260,8 @@ MIT License
 
 ```html
 <link rel="stylesheet" href="wf-datepicker.css">
+<script src="wf-datepicker.js"></script>
+
 <input
   type="text"
   datepicker="range"
@@ -264,13 +275,9 @@ MIT License
   required-valid="true"
   open-on-error="true"
   data-autoclose-first="true"
+  data-min-nights="1"
+  readonly
 />
-<script src="wf-datepicker.js"></script>
 ```
 
 ---
-
-## 💬 Notes
-
-If you’d like to have **different date formats** for the **input field** and the **footer summary**, you can extend this version with:  
-`data-date-format-input` and `data-date-format-footer` attributes.
