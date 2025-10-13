@@ -72,6 +72,7 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | `data-wf-dp-open-on-error` | `true` \| `false` | **false** | If `true`, open the picker when submit is blocked by validation. |
 | `data-wf-dp-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
 | `data-wf-dp-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums. |
+| `data-wf-dp-commit-mode` | `instant` \| `confirm` | **instant** | Controls when the input updates. `instant` updates on each click; `confirm` updates only when the user clicks the Select dates button. |
 
 ### Examples
 
