@@ -15,8 +15,8 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Flexible formatting** – Configure date display with input attributes.  
 - **Configurable limits** – Restrict past/future selection windows by years.  
 - **Real-time validation** – Inline error message; optional open-on-error.  
-- **Maintainable** – Clear code, CSS variables, and minimal API surface.
-- **Configurable stay length** – Define minimum nights or allow same-day selections via attribute.
+- **Maintainable** – Clear code, CSS variables, and minimal API surface.  
+- **Configurable stay length** – Define minimum nights or allow same-day selections via attribute.  
 - **Reset the date range** – Add an optional button to reset the date range selection.
 
 ---
@@ -56,151 +56,112 @@ wf-datepicker/
 
 ---
 
-## ⚙️ Configuration (input attributes)
+# ⚙️ Configuration (input attributes)
 
 Add attributes directly to the input. Defaults shown in **bold**.
 
 | Attribute | Values | Default | What it does |
 |---|---|---|---|
-| `data-disable-past` | `true` \| `false` | **true** | Disable selecting dates before today. |
-| `data-max-years` | number (≥0) | **2** | How many years into the future the user can select. |
-| `data-max-years-past` | number (≥0) | **2** | How many years into the past (only used if `data-disable-past="false"`). |
-| `data-date-format` | pattern string | **`EEE, MMM d`** | Display format (input + footer). See patterns below. |
-| `data-range-separator` | string | **` — `** | Text between start and end dates. |
-| `data-show-nights` | `true` \| `false` | **false** | Show “(n nights)” in footer when a full range is selected. |
-| `required-valid` | `true` \| `false` | **false** | If `true`, field must have a complete range to submit. |
-| `open-on-error` | `true` \| `false` | **false** | If `true`, open the picker when submit is blocked by validation. |
-| `data-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
-| `data-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums |
+| `data-wf-dp-disable-past` | `true` \| `false` | **true** | Disable selecting dates before today. |
+| `data-wf-dp-max-years` | number (≥0) | **2** | How many years into the future the user can select. |
+| `data-wf-dp-max-years-past` | number (≥0) | **2** | How many years into the past (only used if `data-wf-dp-disable-past="false"`). |
+| `data-wf-dp-format` | pattern string | **`EEE, MMM d`** | Display format (input + footer). See patterns below. |
+| `data-wf-dp-separator` | string | **` — `** | Text between start and end dates. |
+| `data-wf-dp-show-nights` | `true` \| `false` | **false** | Show “(n nights)” in footer when a full range is selected. |
+| `data-wf-dp-required` | `true` \| `false` | **false** | If `true`, field must have a complete range to submit. |
+| `data-wf-dp-open-on-error` | `true` \| `false` | **false** | If `true`, open the picker when submit is blocked by validation. |
+| `data-wf-dp-autoclose-first` | `true` \| `false` | **false** | Desktop only: automatically close after the first completed selection (first open only). |
+| `data-wf-dp-min-nights` | `0` \| `1-n` | **1** | Sets the minimum length of the range in nights (end date is exclusive). `0` → same-day selection allowed (0 nights). `2`, `3`, … → enforce longer minimums. |
 
 ### Examples
 
 ```html
-<!-- Default: no past dates, 2 years future, friendly format, no (n nights) -->
 <input datepicker="range" placeholder="Select date range">
-
-<!-- Allow past dates (up to 1 year back); future 3 years -->
-<input datepicker="range" data-disable-past="false" data-max-years-past="1" data-max-years="3">
-
-<!-- ISO format & custom separator -->
-<input datepicker="range" data-date-format="YYYY-MM-DD" data-range-separator=" to ">
-
-<!-- Show nights in footer -->
-<input datepicker="range" data-show-nights="true">
-
-<!-- Validation: require full range; optionally re-open picker on error -->
-<input datepicker="range" required-valid="true" open-on-error="true">
-
-<!-- Desktop: close after the first completed range -->
-<input datepicker="range" data-autoclose-first="true">
+<input datepicker="range" data-wf-dp-disable-past="false" data-wf-dp-max-years-past="1" data-wf-dp-max-years="3">
+<input datepicker="range" data-wf-dp-format="YYYY-MM-DD" data-wf-dp-separator=" to ">
+<input datepicker="range" data-wf-dp-show-nights="true">
+<input datepicker="range" data-wf-dp-required="true" data-wf-dp-open-on-error="true">
+<input datepicker="range" data-wf-dp-autoclose-first="true">
 ```
 
-## ⏏️ Configuration (other attributes)
+---
 
-Add attributes directly to the input. Defaults shown in **bold**.
+# ⏏️ Configuration (external controls)
 
 | Attribute | Values | Default | What it does |
 |---|---|---|---|
-| `wf-datepicker` | `reset` | **–** | when clicked, clear the selected range and reset the input(s) connected to your date pickers. |
-| `data-hide-when-empty` | `""` | **–** | Auto-hide reset buttons when inputs are empty |
+| `data-wf-dp-reset` | *(empty)* | – | When clicked, clear the selected range and reset the connected picker(s). |
+| `data-wf-dp-target` | CSS selector | **`[datepicker="range"]`** | Limits which picker(s) the reset affects. |
+| `data-wf-dp-hide-when-empty` | *(empty)* | – | Automatically hide reset buttons when inputs are empty or no date is selected. |
 
 ### Examples
 
 ```html
-<!-- Reset all pickers -->
-<button wf-datepicker="reset">Reset all dates</button>
-
-<!-- Hide reset button if datepicker empty -->
-<button wf-datepicker="reset" data-hide-when-empty="">Reset all dates</button>
-
-<!-- Reset a specific picker -->
-<input id="booking-range" datepicker="range" data-min-nights="2">
-<button wf-datepicker="reset" data-target="#booking-range">Reset</button>
-
+<button data-wf-dp-reset>Reset all dates</button>
+<button data-wf-dp-reset data-wf-dp-hide-when-empty>Reset all dates</button>
+<input id="booking-range" datepicker="range" data-wf-dp-min-nights="2">
+<button data-wf-dp-reset data-wf-dp-target="#booking-range">Reset</button>
 ```
+
 ---
 
 ## 🗓 Date Format Patterns
 
-Supported tokens (both cases where it makes sense):
-
-- Year: `YYYY`, `yyyy`, `YY`, `yy`
-- Month: `MMMM` (long name), `MMM` (short name), `MM`, `M`
-- Day of month: `DD`, `dd`, `D`, `d`
-- Weekday: `EEEE` (long), `EEE` (short)
-
-### Examples
-
-| Example | Pattern | Typical Use |
-|---|---|---|
-| `2025-10-13` | `YYYY-MM-DD` | Databases, APIs |
-| `13 Oct 2025` | `DD MMM YYYY` | Global web/app UI |
-| `Fri, Feb 20` | `EEE, MMM d` | Dashboards, calendars |
-| `Oct 13, 2025` | `MMM DD, YYYY` | English UIs |
-| `13/10/2025` | `DD/MM/YYYY` | Europe/LatAm |
-| `13 October 2025` | `DD MMMM YYYY` | Invoices, articles |
-| `Monday, February 20, 2025` | `EEEE, MMMM d, yyyy` | Event pages |
-| `13.10.2025` | `DD.MM.YYYY` | Central/Eastern Europe |
-| `2025/10/13` | `YYYY/MM/DD` | Logs, file names |
-| `10/13/2025` | `MM/DD/YYYY` | United States |
+| Token | Meaning |
+|---|---|
+| `YYYY`, `yyyy` | Full year (2025) |
+| `YY`, `yy` | Short year (25) |
+| `MMMM` | Full month name (October) |
+| `MMM` | Short month name (Oct) |
+| `MM`, `M` | Month number (10) |
+| `DD`, `D` | Day number (13) |
+| `EEEE` | Full weekday name (Monday) |
+| `EEE` | Short weekday name (Mon) |
 
 ---
 
-## 📱 Mobile Experience (automatic)
+## 📱 Mobile Experience
 
-- On screens **< 768px**, the picker becomes a **fullscreen modal**:
-  - Sticky **header** with “Select dates” and a **close (X)** button.
-  - Sticky **weekdays** row.
-  - All months from the configured window are stacked vertically (no nav buttons).
-  - Sticky **footer** with summary (and optional **(n nights)**) + “Select dates” button.
-  - On first open, the modal auto-scrolls to **current month** (or to the **start month** if a range is already selected).
-- Smooth, jank-free interactions (preserves scroll position during re-renders).
+- On screens <768px: fullscreen modal.  
+- Sticky header + close button.  
+- Sticky weekdays.  
+- Auto-scroll to current/start month.  
+- Sticky footer with summary and button.  
 
 ---
 
 ## 🖥 Desktop Experience
 
-- Anchored popover below the input.  
-- **Two months** displayed side-by-side.  
-- Previous/Next arrows at the sides of the calendar.  
-- Optional **auto-close** after first completed selection: `data-autoclose-first="true"`.  
+- Popover anchored to the input.  
+- Two months side-by-side.  
+- Previous/Next arrows.  
+- Optional autoclose (`data-wf-dp-autoclose-first="true"`).  
 
 ---
 
 ## ✅ Selection & Validation Logic
 
-- **First tap** selects the **start** date.  
-- **Second tap**:
-  - If **after** start → completes the range.  
-  - If **before** start → resets start (waits for a new end).  
-  - **Same day** is **not allowed** (must be at least 1 night).  
-- **Input value updates instantly**:
-  - Partial: `Tue, Oct 14 — End Date`  
-  - Complete: `Tue, Oct 14 — Fri, Oct 17`
-- **Validation**:
-  - If `required-valid="true"`: the form won’t submit without a full range.
-  - Even without `required-valid`, a **partial** selection (start only) shows an inline error and blocks submit.
-  - `open-on-error="true"` will open the picker when the form is blocked.
+- First click → start date.  
+- Second click → end date (if valid).  
+- Same day allowed if `data-wf-dp-min-nights="0"`.  
+- Input auto-updates (partial or full range).  
+- Form blocked if incomplete range and `data-wf-dp-required="true"`.  
 
 ---
 
 ## 🎯 Events
 
-Subscribe to changes if you need to read JS Date objects:
-
 ```js
 const input = document.querySelector('input[datepicker="range"]');
 input.addEventListener('wf-datepicker:change', (e) => {
-  const { startDate, endDate } = e.detail; // JS Date objects (cloned)
+  const { startDate, endDate } = e.detail;
   console.log('Range selected:', startDate, endDate);
 });
 ```
 
 ---
 
-## 🎨 Theming (CSS variables)
-
-Define these to match your design system:
+## 🎨 Theming (CSS Variables)
 
 ```css
 :root {
@@ -232,28 +193,16 @@ Define these to match your design system:
 
 ---
 
-## 🧩 Programmatic API (lightweight)
-
-Each input gets an instance stored at `input.__wfDatepicker`:
+## 🧩 API Access
 
 ```js
 const input = document.querySelector('input[datepicker="range"]');
 const picker = input.__wfDatepicker;
 
-// optional helpers:
 picker.open();
-picker.close(true); // triggers validation on close
-
-// read state:
-console.log(picker.start, picker.end); // JS Date objects or null
+picker.close(true);
+console.log(picker.start, picker.end);
 ```
-
----
-
-## 🛡 Browser Support
-
-- ✅ Chrome, Firefox, Safari, Edge (modern versions)  
-- ❌ No Internet Explorer support  
 
 ---
 
@@ -261,16 +210,10 @@ console.log(picker.start, picker.end); // JS Date objects or null
 
 | Issue | Fix |
 |---|---|
-| **Native HTML validation tooltip appears** | Remove the native `required` attribute. Use `required-valid="true"` instead. |
-| **Popover misplaced** | Avoid transforms on parent containers — the popover is `position: fixed`. |
-| **Mobile tap feels delayed** | Add `touch-action: manipulation;` in your CSS (see above). |
-| **Can’t scroll to past months on mobile** | Set `data-disable-past="false"` and configure `data-max-years-past`. |
-
----
-
-## 🔒 Accessibility
-
-Basic ARIA roles are present, but full screen reader support and keyboard navigation are planned for a future version.
+| Native tooltip shows | Remove native `required`; use `data-wf-dp-required="true"`. |
+| Popover misplaced | Avoid transforms; it uses `position: fixed`. |
+| Mobile tap delay | Add `touch-action: manipulation;`. |
+| Can't select past | Set `data-wf-dp-disable-past="false"`. |
 
 ---
 
@@ -280,7 +223,7 @@ MIT License
 
 ---
 
-## 📄 Quick Copy/Paste Example
+## 📄 Quick Example
 
 ```html
 <link rel="stylesheet" href="wf-datepicker.css">
@@ -290,20 +233,20 @@ MIT License
   type="text"
   datepicker="range"
   placeholder="Select date range"
-  data-date-format="DD MMM YYYY"
-  data-range-separator=" — "
-  data-disable-past="false"
-  data-max-years-past="1"
-  data-max-years="3"
-  data-show-nights="true"
-  required-valid="true"
-  open-on-error="true"
-  data-autoclose-first="true"
-  data-min-nights="1"
+  data-wf-dp-format="DD MMM YYYY"
+  data-wf-dp-separator=" — "
+  data-wf-dp-disable-past="false"
+  data-wf-dp-max-years-past="1"
+  data-wf-dp-max-years="3"
+  data-wf-dp-show-nights="true"
+  data-wf-dp-required="true"
+  data-wf-dp-open-on-error="true"
+  data-wf-dp-autoclose-first="true"
+  data-wf-dp-min-nights="1"
   readonly
 />
 
-<button type="button" wf-datepicker="reset">Reset dates</button>
+<button type="button" data-wf-dp-reset data-wf-dp-target="#booking-range">Reset dates</button>
 ```
 
 ---
