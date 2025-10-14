@@ -1,11 +1,11 @@
-# WF Date Range Picker
+# WebFolks Date Range Picker
 
 A lightweight, **vanilla JavaScript** date range picker optimized for **Webflow** and modern websites.  
 No dependencies, clean UI, perfect UX on desktop and mobile.
 
 ---
 
-## ✨ Why this date picker?
+## ✨ Why WebFolks date picker?
 
 - **Vanilla JS, zero deps** – Drop it into any Webflow project or site.  
 - **Single input, date *range*** – One field, two dates. Minimal mental load.  
