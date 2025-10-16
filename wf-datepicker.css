@@ -1,0 +1,364 @@
+:root {
+  --wf-dp-primary: #09a682; /* Primary brand color used across interactive elements (buttons, highlights, active states) */
+  --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black); /* Darker variant of the primary color for hover or pressed states */
+  --wf-dp-range-color: color-mix(in srgb, var(--wf-dp-primary) 10%, white); /* Background color for selected date ranges or highlighted areas */
+  
+  --wf-dp-fg-strong: #1b1c1f; /* Used for strong foregrounds – main titles, cells, etc */
+  --wf-dp-fg-medium: #3e4146; /* Used for medium foregrounds such as weekdays */
+  --wf-dp-fg-weak: #818996; /* Used for weak foregrounds such as icons */
+  
+  --wf-dp-border: #e5e7eb; /* Base border color for inputs, popovers, and dividers */
+  --wf-dp-bg: #ffffff; /* Default background color for components and containers */
+  --wf-dp-error: #e53935; /* Error color */
+  --wf-dp-hover: #f3f4f6; /* Background color used for hover states and subtle surface changes */
+  --wf-dp-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06); /* Soft, layered shadow for popovers, modals, and elevated surfaces */
+}
+
+
+/* Input */
+.wf-dp-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--wf-dp-border);
+  border-radius: 10px;
+  background: var(--wf-dp-bg);
+  cursor: pointer;
+}
+
+.wf-dp-input:focus-visible {
+  outline: 2px solid var(--wf-dp-primary); 
+  outline-offset: 1px;
+}
+
+.wf-dp-error {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1em;
+  color: var(--wf-dp-error);
+}
+
+.wf-dp-input-error {
+  border-color: var(--wf-dp-error);
+}
+
+/* Dropdown */
+.wf-dp-popover {
+  z-index: 9999;
+  display: none;
+  padding: 12px;
+  background: var(--wf-dp-bg);
+  border: 1px solid var(--wf-dp-border);
+  border-radius: 14px;
+  box-shadow: var(--wf-dp-shadow);
+}
+
+.wf-dp-popover.open {
+  display: block;
+}
+
+.wf-dp-cal-wrap {
+  position: relative;
+}
+
+.wf-dp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 12px;
+  border-bottom: 1px solid var(--wf-dp-border);
+}
+
+.wf-dp-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Calendars */
+.wf-dp-cal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.wf-dp-month {
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.wf-dp-month-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--wf-dp-fg-strong);
+}
+
+.wf-dp-weekdays,
+.wf-dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 0;
+  margin-bottom: 12px;
+}
+
+.wf-dp-weekday {
+  font-size: 13px;
+  text-align: center;
+  color: var(--wf-dp-fg-medium);
+}
+
+/* Cells / days */
+.wf-dp-cell {
+  position: relative;
+  padding: 10px 6px;
+  text-align: center;
+  color: var(--wf-dp-fg-strong);
+  user-select: none;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.wf-dp-cell:hover {
+  background: var(--wf-dp-hover);
+}
+
+.wf-dp-day {
+  display: inline-block;
+  min-width: 28px;
+}
+
+.wf-dp-empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.wf-dp-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* prevents accidental taps */
+}
+
+.wf-dp-today {
+  color: var(--wf-dp-primary);
+  font-weight: 700;
+}
+
+/* Range visuals */
+.wf-dp-inrange {
+  background: var(--wf-dp-range-color);
+}
+
+.wf-dp-start,
+.wf-dp-end {
+  background: var(--wf-dp-primary);
+  color: var(--wf-dp-bg);
+}
+
+.wf-dp-start {
+  border-radius: 8px 0 0 8px;
+}
+
+.wf-dp-end {
+  border-radius: 0 8px 8px 0;
+}
+
+.wf-dp-start.wf-dp-end {
+  border-radius: 8px;
+}
+
+/* Hover for endpoints */
+.wf-dp-start:hover,
+.wf-dp-end:hover {
+  background: var(--wf-dp-primary);
+}
+
+/* Footer */
+.wf-dp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 8px;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--wf-dp-border);
+}
+
+.wf-dp-footer-left {
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--wf-dp-fg-medium);
+}
+
+.wf-dp-cta {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--wf-dp-primary);
+  color: var(--wf-dp-bg);
+  transition: background-color 0.2s ease;
+}
+
+.wf-dp-cta:hover {
+  background: var(--wf-dp-primary-hover);
+}
+
+.wf-dp-cta:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Nav buttons */
+.wf-dp-btn {
+  position: absolute;
+  top: 6px;
+  z-index: 2;
+  padding: 4px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--wf-dp-fg-weak);
+  transition: background-color 0.2s ease;  
+  cursor: pointer;
+  line-height: 0; /* better hit-area without layout shifts */
+}
+
+.wf-dp-btn:hover {
+  background: var(--wf-dp-hover);
+}
+
+.wf-dp-btn.prev {
+  left: 12px;
+}
+.wf-dp-btn.next {
+  right: 12px;
+}
+
+.wf-dp-btn:disabled {
+  display: none;
+}
+
+.wf-dp-btn svg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .wf-dp-cal {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-dp-popover {
+    /* full-bleed container; position can be controlled via JS if needed */
+    background: var(--wf-dp-bg);
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .wf-dp-modal {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto; /* header, weekdays, scroll, footer */
+    width: 100%;
+    height: 100%;
+  }
+
+  .wf-dp-m-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: var(--wf-dp-bg);
+    border-bottom: 1px solid var(--wf-dp-border);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .wf-dp-m-close {
+    right: 16px;
+    background: none;
+    border: none;
+    padding: 6px;
+    color: var(--wf-dp-fg-weak);
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  .wf-dp-m-close svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .wf-dp-m-weekdays {
+    position: sticky;
+    top: 48px; /* header height */
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 8px 16px;
+    background: var(--wf-dp-bg);
+    border-bottom: 1px solid var(--wf-dp-border);
+  }
+
+  .wf-dp-m-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 8px 16px;
+  }
+
+  .wf-dp-weekdays {
+    display: none; /* hide per-month weekdays on mobile */
+  }
+
+  .wf-dp-m-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--wf-dp-bg);
+    border-top: 1px solid var(--wf-dp-border);
+  }
+
+  /* Reset hovers on mobile */
+  .wf-dp-cell:hover {
+    background: var(--wf-dp-bg);
+  }
+
+  .wf-dp-start:hover,
+  .wf-dp-end:hover {
+    background: var(--wf-dp-primary);
+  }
+  
+  .wf-dp-cell.wf-dp-inrange {
+    background-color: var(--wf-dp-hover);
+  }
+}
+
+/* Kill tap highlight on iOS/Android */
+.wf-dp-cell,
+.wf-dp-btn,
+.wf-dp-cta {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Disable animations during controlled renders */
+.wf-dp-rendering * {
+  transition: none !important;
+  animation: none !important;
+}
