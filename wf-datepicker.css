@@ -1,5 +1,5 @@
 :root {
-  --wf-dp-primary: #2960e3; /* Primary brand color used across interactive elements (buttons, highlights, active states) */
+  --wf-dp-primary: #09a682; /* Primary brand color used across interactive elements (buttons, highlights, active states) */
   --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black); /* Darker variant of the primary color for hover or pressed states */
   --wf-dp-range-color: color-mix(in srgb, var(--wf-dp-primary) 10%, white); /* Background color for selected date ranges or highlighted areas */
   
