@@ -21,6 +21,7 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Smart positioning** – Choose how the calendar opens: above, below, or auto-adjusted to the viewport.
 - **Flexible alignment** – Align popovers left, center, or right relative to the input.
 - **Commit modes** – Choose instant input updates or confirm-on-CTA for controlled UX.
+- **Accessible by design (ARIA)** – Proper roles and labeling, roving focus with keyboard nav (arrows, Home/End, PgUp/PgDn), Tab skips disabled dates, Enter/Space to select, Esc to close, and live status updates for screen readers.
 
 ---
 
