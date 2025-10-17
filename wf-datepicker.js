@@ -294,33 +294,94 @@
       }
     }
 
-    _bind() {
-      // Focus origin
+   _bind() {
+      // ---------------- Internal flags ----------------
+      this._closingByInput = false;      // set when we close via input click
+      this._skipNextFocusOpen = false;   // set on contextmenu/right-click
+      this._suppressFocusOpen = this._suppressFocusOpen || false;
+      this._lastPointerWasOnInput = false;
+      this._lastFocusViaKeyboard = false;
+    
+      // ---------------- Focus origin tracking ----------------
       document.addEventListener('pointerdown', (e) => {
-        this._lastPointerWasOnInput = (e.target === this.input);
+        const isPrimary = (e.button === 0) || (e.pointerType === 'touch');
+        this._lastPointerWasOnInput = (isPrimary && e.target === this.input);
         this._lastFocusViaKeyboard = false;
       }, true);
+    
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') this._lastFocusViaKeyboard = true;
       }, true);
-
-      // Openers
-      this.input.addEventListener('click', (e) => { e.stopPropagation(); this.open(); });
+    
+      // Prevent opening due to context menu / right-click focus
+      this.input.addEventListener('contextmenu', () => {
+        this._skipNextFocusOpen = true;
+        setTimeout(() => { this._skipNextFocusOpen = false; }, 0);
+      });
+    
+      // ---------------- Toggle on input ----------------
+      // If popover is open and user primary-clicks input -> close instead of reopen.
+      this.input.addEventListener('mousedown', (e) => {
+        const isPrimary = (e.button === 0) || (e.pointerType === 'touch');
+        if (!isPrimary) return;
+    
+        if (this.popover.classList.contains('open')) {
+          // Mark that we're closing via the input to suppress follow-up focus/click opens
+          this._closingByInput = true;
+    
+          // Prevent the click from firing (Chrome) and stop bubbling
+          e.preventDefault();
+          e.stopImmediatePropagation();
+    
+          this.close(true);
+    
+          // Extra guards to ignore immediate focus-open after close
+          this._suppressFocusOpen = true;
+          this._lastPointerWasOnInput = false; // so focus handler won't consider it
+          setTimeout(() => {
+            this._suppressFocusOpen = false;
+            this._closingByInput = false;
+          }, 160); // > one frame; safe across browsers
+        }
+      });
+    
+      // Open on click only when closed (primary only).
+      this.input.addEventListener('click', (e) => {
+        const isPrimary = (e.button === 0) || (e.pointerType === 'touch') || (e.detail >= 0);
+        if (!isPrimary) return;
+    
+        // If we just closed via input, swallow this click.
+        if (this._closingByInput) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return;
+        }
+    
+        e.stopPropagation();
+        if (!this.popover.classList.contains('open')) this.open();
+      });
+    
+      // Open on focus when: (a) from keyboard Tab, or (b) from primary pointer on input
       this._onInputFocus ||= () => {
         if (this._suppressFocusOpen) return;
+        if (this._skipNextFocusOpen) return;
+        if (this._closingByInput) return; // <- critical: ignore focus right after closing
         if (!this._lastFocusViaKeyboard && !this._lastPointerWasOnInput) return;
         this.open();
       };
       this.input.addEventListener('focus', this._onInputFocus);
-
-      // Close outside
+    
+      // ---------------- Close when clicking outside ----------------
       document.addEventListener('pointerdown', (e) => {
+        if (!this.popover.classList.contains('open')) return;
         if (!this.popover.contains(e.target) && e.target !== this.input) this.close(true);
       });
       this.popover.addEventListener('pointerdown', (e) => e.stopPropagation());
-
-      // --- Guarded day selection (prevents scroll-accidental picks) -----
+    
+      // ---------------- Guarded day selection (tap vs scroll) ----------------
       const TAP_MOVE_TOL = 6; // px
+      this._g = this._g || { active:false, id:null, x:0, y:0, moved:false, target:null };
+    
       this._onPD = (e) => {
         if (e.button != null && e.button !== 0) return; // primary only
         const cell = e.target.closest('.wf-dp-cell[data-date]');
@@ -330,7 +391,6 @@
         this._g.y = e.clientY;
         this._g.moved = false;
         this._g.target = cell && !cell.classList.contains('wf-dp-disabled') ? cell : null;
-        // DO NOT preventDefault — allow natural scrolling
       };
       this._onPM = (e) => {
         if (!this._g.active) return;
@@ -344,18 +404,17 @@
         const target = this._g.target;
         this._g.active = false; this._g.target = null;
         if (!wasTap) return;
-
+    
         const [y,m,d] = target.getAttribute('data-date').split('-').map(Number);
         const date = new Date(y, m-1, d);
         this.selectDay(date);
-        // Prevents subsequent synthetic click (speeds up feel on some browsers)
-        e.preventDefault();
+        e.preventDefault(); // avoid synthetic click
       };
       this.popover.addEventListener('pointerdown', this._onPD);
       this.popover.addEventListener('pointermove', this._onPM);
       this.popover.addEventListener('pointerup',   this._onPU);
-
-      // Focus-out closes
+    
+      // ---------------- Focus-out closes ----------------
       this._onDocFocusIn ||= (e) => {
         if (!this.popover.classList.contains('open')) return;
         const t = e.target;
@@ -364,8 +423,8 @@
         this.close(true);
       };
       document.addEventListener('focusin', this._onDocFocusIn);
-
-      // Layout
+    
+      // ---------------- Layout adjustments ----------------
       window.addEventListener('resize', () => {
         if (this.popover.classList.contains('open')) {
           this.render();
@@ -373,7 +432,13 @@
           requestAnimationFrame(() => this.position());
         }
       });
-      window.addEventListener('scroll', () => { if (!this.isMobile()) this.position(); }, true);
+    
+      window.addEventListener('scroll', () => {
+        if (!this.isMobile() && this.popover.classList.contains('open')) this.position();
+      }, true);
+    
+      // ---------------- Keyboard inside popover (unchanged hook) ----------------
+      // Your existing keydown binding is added in open()
     }
 
     open() {
@@ -842,7 +907,7 @@
         const picker = input.__wfDatepicker;
         return (picker && picker.start) || (input.value.trim() !== '');
       });
-      btn.style.display = hasSelection ? 'block' : 'none';
+      btn.style.setProperty('display', hasSelection ? 'block' : 'none', 'important');
     });
   }
 
