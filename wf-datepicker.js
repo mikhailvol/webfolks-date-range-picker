@@ -842,7 +842,7 @@
         const picker = input.__wfDatepicker;
         return (picker && picker.start) || (input.value.trim() !== '');
       });
-      btn.style.display = hasSelection ? 'block' : 'none';
+      btn.style.setProperty('display', hasSelection ? 'block' : 'none', 'important');
     });
   }
 
