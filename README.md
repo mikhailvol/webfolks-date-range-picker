@@ -253,7 +253,7 @@ console.log(picker.start, picker.end);
 
 ## 📝 License
 
-LINK
+[MIT](https://github.com/mikhailvol/webfolks-date-range-picker?tab=License-1-ov-file)
 
 ---
 
