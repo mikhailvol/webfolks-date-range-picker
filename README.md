@@ -205,9 +205,9 @@ Add attributes directly to the input. Defaults shown in **bold**.
 
 ---
 
-## 🧩 API Access
+## 🧩 API & Events
 
-[Read API Reference →](API%20%26%20Events.md)
+[Read API & Events →](API%20%26%20Events.md)
 
 ---
 
