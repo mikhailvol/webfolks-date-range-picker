@@ -151,6 +151,6 @@ window.addEventListener('load', () => {
 
 ---
 
-## 📜 License
+## 📝 License
 
-MIT © Mikhail Voloshyn
+[MIT](https://github.com/mikhailvol/webfolks-date-range-picker?tab=License-1-ov-file)
