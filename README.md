@@ -41,13 +41,13 @@ wf-datepicker/
 1. **Add the CSS** (before `</head>`):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.5/wf-datepicker.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.css">
 ```
 
 2. **Add the JS** (right before `</body>`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.5/wf-datepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
 ```
 
 3. **Add your input field**:
@@ -220,8 +220,8 @@ Add attributes directly to the input. Defaults shown in **bold**.
 ## 📄 Quick Example
 
 ```html
-<link rel="stylesheet" href="wf-datepicker.css">
-<script src="wf-datepicker.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.css">
+<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
 
 <input
   type="text"
