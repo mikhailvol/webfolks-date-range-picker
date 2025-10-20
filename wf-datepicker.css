@@ -1,3 +1,5 @@
+/*! MIT License | © 2025 Mykhailo Voloshyn, WebFolks.io */
+
 :root {
   --wf-dp-primary: #2960e3; /* Primary brand color used across interactive elements (buttons, highlights, active states) */
   --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black); /* Darker variant of the primary color for hover or pressed states */
@@ -17,7 +19,7 @@
 
 /* Input */
 .wf-dp-input {
-  width: 100%;
+  min-width: 280px;
   padding: 12px 14px;
   border: 1px solid var(--wf-dp-border);
   border-radius: 10px;
