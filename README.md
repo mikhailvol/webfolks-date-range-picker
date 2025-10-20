@@ -199,29 +199,19 @@ input.addEventListener('wf-datepicker:change', (e) => {
 
 ```css
 :root {
-  /* Primary brand color used across interactive elements (buttons, highlights, active states) */
-  --wf-dp-primary: #0062eb;
-
-  /* Darker variant of the primary color for hover or pressed states */
-  --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black);
-
-  /* Background color for selected date ranges or highlighted areas */
-  --wf-dp-range-color: color-mix(in srgb, var(--wf-dp-primary) 10%, white);
-
-  /* Neutral text or icon color for secondary and less emphasized UI elements */
-  --wf-dp-grey: #595959;
-
-  /* Base border color for inputs, popovers, and dividers */
-  --wf-dp-border: #e5e7eb;
-
-  /* Default background color for components and containers */
-  --wf-dp-bg: #ffffff;
-
-  /* Background color used for hover states and subtle surface changes */
-  --wf-dp-hover: #f3f4f6;
-
-  /* Soft, layered shadow for popovers, modals, and elevated surfaces */
-  --wf-dp-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --wf-dp-primary: #2960e3; /* Primary brand color used across interactive elements (buttons, highlights, active states) */
+  --wf-dp-primary-hover: color-mix(in srgb, var(--wf-dp-primary) 90%, black); /* Darker variant of the primary color for hover or pressed states */
+  --wf-dp-range-color: color-mix(in srgb, var(--wf-dp-primary) 10%, white); /* Background color for selected date ranges or highlighted areas */
+  
+  --wf-dp-fg-strong: #1b1c1f; /* Used for strong foregrounds – main titles, cells, etc */
+  --wf-dp-fg-medium: #3e4146; /* Used for medium foregrounds such as weekdays */
+  --wf-dp-fg-weak: #818996; /* Used for weak foregrounds such as icons */
+  
+  --wf-dp-border: #e5e7eb; /* Base border color for inputs, popovers, and dividers */
+  --wf-dp-bg: #ffffff; /* Default background color for components and containers */
+  --wf-dp-error: #e53935; /* Error color */
+  --wf-dp-hover: #f3f4f6; /* Background color used for hover states and subtle surface changes */
+  --wf-dp-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06); /* Soft, layered shadow for popovers, modals, and elevated surfaces */
 }
 ```
 
@@ -229,25 +219,7 @@ input.addEventListener('wf-datepicker:change', (e) => {
 
 ## 🧩 API Access
 
-```js
-const input = document.querySelector('input[datepicker="range"]');
-const picker = input.__wfDatepicker;
-
-picker.open();
-picker.close(true);
-console.log(picker.start, picker.end);
-```
-
----
-
-## 🧰 Troubleshooting
-
-| Issue | Fix |
-|---|---|
-| Native tooltip shows | Remove native `required`; use `data-wf-dp-required="true"`. |
-| Popover misplaced | Avoid transforms; it uses `position: fixed`. |
-| Mobile tap delay | Add `touch-action: manipulation;`. |
-| Can't select past | Set `data-wf-dp-disable-past="false"`. |
+[API](https://github.com/mikhailvol/webfolks-date-range-picker?tab=...)
 
 ---
 
@@ -285,5 +257,3 @@ console.log(picker.start, picker.end);
 
 <button type="button" data-wf-dp-reset data-wf-dp-target="#booking-range">Reset dates</button>
 ```
-
----
