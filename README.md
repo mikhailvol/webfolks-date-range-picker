@@ -219,7 +219,7 @@ input.addEventListener('wf-datepicker:change', (e) => {
 
 ## 🧩 API Access
 
-[API](https://github.com/mikhailvol/webfolks-date-range-picker?tab=...)
+[Read API Reference →](API.md)
 
 ---
 
