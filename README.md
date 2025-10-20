@@ -47,7 +47,7 @@ wf-datepicker/
 2. **Add the JS** (right before `</body>`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
 ```
 
 3. **Add your input field**:
@@ -221,7 +221,7 @@ Add attributes directly to the input. Defaults shown in **bold**.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.css">
-<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.js"></script>
 
 <input
   type="text"

@@ -168,7 +168,7 @@ Use the **API** when you need:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@latest/wf-datepicker.css">
-<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@vlatest/wf-datepicker.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@vlatest/wf-datepicker.js"></script>
 
 <input type="text" datepicker="range" placeholder="Select date range">
 <div id="open-dates">Open dates</div>
