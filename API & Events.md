@@ -111,6 +111,47 @@ input.addEventListener('wf-datepicker:change', (e) => {
 
 ---
 
+## 🎯 Events
+
+The Date Range Picker emits a single custom event you can listen to for full reactivity.
+
+### `wf-datepicker:change`
+
+Triggered whenever the user updates the range (start, end, or both).
+
+#### Example
+
+```js
+const input = document.querySelector('input[datepicker="range"]');
+input.addEventListener('wf-datepicker:change', (e) => {
+  const { startDate, endDate } = e.detail;
+  console.log('Range selected:', startDate, endDate);
+});
+```
+
+#### Event detail
+
+| Property | Type | Description |
+|-----------|------|-------------|
+| `startDate` | `Date` or `null` | The selected start date |
+| `endDate` | `Date` or `null` | The selected end date |
+
+#### Use cases
+
+- Update hidden check-in/out fields in Webflow forms  
+- Trigger pricing recalculation based on length of stay  
+- Fire analytics events (`dataLayer.push`, PostHog, etc.)  
+- Auto-scroll to the next step in booking flow
+
+---
+
+### 🧠 Tip
+
+If you only need to open/close or read dates, use the **API Access** methods.  
+If you want to **react to user actions**, use the `wf-datepicker:change` event.
+
+---
+
 ## 🧠 When to Use the API
 
 Use **attributes** for static configuration (format, min nights, alignment, etc.).  
@@ -126,8 +167,8 @@ Use the **API** when you need:
 ## 🧩 Example — Full Demo
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.4/wf-datepicker.css">
-<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.4/wf-datepicker.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.4/wf-datepicker.css"> //connect the last version
+<script src="https://cdn.jsdelivr.net/gh/mikhailvol/webfolks-date-range-picker@v1.0.4/wf-datepicker.js"></script> //connect the last version
 
 <input type="text" datepicker="range" placeholder="Select date range">
 <div id="open-dates">Open dates</div>
@@ -142,6 +183,11 @@ window.addEventListener('load', () => {
     if (!picker) return requestAnimationFrame(waitForPicker);
 
     openBtn.addEventListener('click', () => picker.open());
+
+    input.addEventListener('wf-datepicker:change', (e) => {
+      const { startDate, endDate } = e.detail;
+      console.log('Range selected:', startDate, endDate);
+    });
   };
 
   waitForPicker();

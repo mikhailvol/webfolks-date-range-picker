@@ -183,18 +183,6 @@ Add attributes directly to the input. Defaults shown in **bold**.
 
 ---
 
-## 🎯 Events
-
-```js
-const input = document.querySelector('input[datepicker="range"]');
-input.addEventListener('wf-datepicker:change', (e) => {
-  const { startDate, endDate } = e.detail;
-  console.log('Range selected:', startDate, endDate);
-});
-```
-
----
-
 ## 🎨 Theming (CSS Variables)
 
 ```css
@@ -217,9 +205,9 @@ input.addEventListener('wf-datepicker:change', (e) => {
 
 ---
 
-## 🧩 API Access
+## 🧩 API & Events
 
-[Read API Reference →](API.md)
+[Read API & Events →](API%20%26%20Events.md)
 
 ---
 
