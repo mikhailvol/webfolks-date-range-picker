@@ -1,3 +1,5 @@
+/*! MIT License | © 2025 Mykhailo Voloshyn, WebFolks.io */
+
 (function() {
   // Utilities --------------------------------------------------------------
   const pad = (n) => (n < 10 ? '0' + n : '' + n);
