@@ -14,8 +14,14 @@
   --wf-dp-error: #e53935; /* Error color */
   --wf-dp-hover: #f3f4f6; /* Background color used for hover states and subtle surface changes */
   --wf-dp-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06); /* Soft, layered shadow for popovers, modals, and elevated surfaces */
+
+  --safe-bottom: env(safe-area-inset-bottom, 0px); /* Fallback var that’s 0 on non-iOS or no notch */
 }
 
+/* Legacy support (older Safari used constant()) */
+@supports (padding: constant(safe-area-inset-bottom)) {
+  :root { --safe-bottom: constant(safe-area-inset-bottom); }
+}
 
 /* Input */
 .wf-dp-input {
@@ -336,6 +342,7 @@ input[datepicker="range"] {
     justify-content: space-between;
     gap: 12px;
     padding: 12px 16px;
+    padding-bottom: max(var(--safe-bottom), 12px);
     background: var(--wf-dp-bg);
     border-top: 1px solid var(--wf-dp-border);
   }
