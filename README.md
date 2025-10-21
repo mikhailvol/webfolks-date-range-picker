@@ -22,6 +22,7 @@ No dependencies, clean UI, perfect UX on desktop and mobile.
 - **Flexible alignment** – Align popovers left, center, or right relative to the input.
 - **Commit modes** – Choose instant input updates or confirm-on-CTA for controlled UX.
 - **Accessible by design (ARIA)** – Proper roles and labeling, roving focus with keyboard nav (arrows, Home/End, PgUp/PgDn), Tab skips disabled dates, Enter/Space to select, Esc to close, and live status updates for screen readers.
+- **Locale language support** – Control month and weekday language.
 
 ---
 
@@ -79,6 +80,7 @@ Add attributes directly to the input. Defaults shown in **bold**.
 | `data-wf-dp-commit-mode` | `instant` \| `confirm` | **instant** | Controls when the input updates. `instant` updates on each click; `confirm` updates only when the user clicks the Select dates button. |
 | `data-wf-dp-align` | `left` \| `center` \| `right` | **center** | Horizontal alignment of the popover relative to the input. |
 | `data-wf-dp-drop` | `down` \| `up` \| `auto` | **down** | Controls whether the popover opens below, above, or auto-selects direction based on viewport space. |
+| `data-wf-dp-locale` | [BCP-47 locale code](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag) (e.g. `en`, `en-US`, `pl`, `uk`, `de`) | **en** | Sets the language for month and weekday names. Defaults to English if not specified. |
 
 ### Examples
 

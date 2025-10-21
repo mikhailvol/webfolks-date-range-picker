@@ -85,7 +85,12 @@
 
       this.dateFormat    = input.getAttribute('data-wf-dp-format')    || 'EEE, MMM d';
       this.rangeSep      = input.getAttribute('data-wf-dp-separator') || ' — ';
-      this.locale        = undefined;
+      // Locale setup — default EN, allow override via attribute
+      const attrLocale = input.getAttribute('data-wf-dp-locale');
+      this.locale = (typeof Intl !== 'undefined' && Intl.supportedLocalesOf)
+        ? (Intl.supportedLocalesOf([attrLocale || 'en'])[0] || 'en')
+        : (attrLocale || 'en');
+
       this.showNights    = bool('data-wf-dp-show-nights', false);
 
       this.isRequired     = bool('data-wf-dp-required', false);
