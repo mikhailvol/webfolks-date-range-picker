@@ -23,13 +23,17 @@
   padding: 12px 14px;
   border: 1px solid var(--wf-dp-border);
   border-radius: 10px;
-  background: var(--wf-dp-bg);
-  cursor: pointer;
 }
 
 .wf-dp-input:focus-visible {
   outline: 2px solid var(--wf-dp-primary); 
   outline-offset: 1px;
+}
+
+input[datepicker="range"] {
+  cursor: pointer;
+  color: var(--wf-dp-fg-strong);
+  background-color: #ffffff;
 }
 
 .wf-dp-error {
